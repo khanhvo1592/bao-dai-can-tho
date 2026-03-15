@@ -363,24 +363,19 @@
       }
     }
 
-    /* === HERO GRADIENT ANIMATE === */
-    .hero-bg-animate {
-      background: linear-gradient(-45deg, #001a3a, #0054a6, #003d7a, #002855);
-      background-size: 400% 400%;
-      animation: heroGradient 12s ease infinite;
+    /* === KEN BURNS EFFECT (Slider Background) === */
+    .kenburns {
+      animation: kenburns 20s ease-out both infinite alternate;
+      transform-origin: center center;
     }
 
-    @keyframes heroGradient {
+    @keyframes kenburns {
       0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
+        transform: scale(1) translate(0, 0);
       }
 
       100% {
-        background-position: 0% 50%;
+        transform: scale(1.12) translate(-1%, -1%);
       }
     }
 
@@ -502,19 +497,39 @@
   </header>
   <!-- END: MainHeader -->
 
-  <!-- Hero Section -->
-  <section class="relative hero-bg-animate text-white overflow-hidden scanlines">
-    <!-- Particles Canvas -->
-    <canvas id="particles-canvas"></canvas>
+  <!-- Hero Section (Dual-Layer Slider) -->
+  <section id="hero-slider" class="relative text-white overflow-hidden scanlines h-[80vh] min-h-[600px] flex items-center">
+    
+    <!-- BACKGROUND LAYER (Layer 1) -->
+    <div class="absolute inset-0 z-0 bg-black">
+      <!-- Slide 1 BG -->
+      <div class="slider-bg absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out active">
+        <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0f1?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover kenburns" alt="Studio 1">
+        <div class="absolute inset-0 bg-ct-blue/80 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#001a3a] via-[#0054a6]/50 to-transparent"></div>
+      </div>
+      <!-- Slide 2 BG -->
+      <div class="slider-bg absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+        <img src="https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?q=80&w=2080&auto=format&fit=crop" class="w-full h-full object-cover kenburns" alt="Radio">
+        <div class="absolute inset-0 bg-ct-red/70 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#4a0000] via-[#ed1c24]/50 to-transparent"></div>
+      </div>
+      <!-- Slide 3 BG -->
+      <div class="slider-bg absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+        <img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover kenburns" alt="Digital">
+        <div class="absolute inset-0 bg-gray-900/80 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-gray-900/50 to-transparent"></div>
+      </div>
+    </div>
 
-    <!-- Data Stream Lines -->
-    <div class="data-stream" style="top:20%; width:40%; left:0; animation-delay:0s;"></div>
-    <div class="data-stream" style="top:50%; width:30%; left:10%; animation-delay:1.5s;"></div>
-    <div class="data-stream" style="top:75%; width:50%; left:5%; animation-delay:3s;"></div>
+    <!-- FOREGROUND / EFFECTS LAYER -->
+    <canvas id="particles-canvas" class="z-10"></canvas>
+    
+    <div class="data-stream z-10" style="top:20%; width:40%; left:0; animation-delay:0s;"></div>
+    <div class="data-stream z-10" style="top:50%; width:30%; left:10%; animation-delay:1.5s;"></div>
+    <div class="data-stream z-10" style="top:75%; width:50%; left:5%; animation-delay:3s;"></div>
 
-    <!-- ON AIR Indicator -->
-    <div
-      class="absolute top-6 right-6 z-20 on-air text-white bg-black/40 px-4 py-2 rounded-full backdrop-blur-sm border border-white/10">
+    <div class="absolute top-6 right-6 z-30 on-air text-white bg-black/40 px-4 py-2 rounded-full backdrop-blur-sm border border-white/10">
       <div class="on-air-dot"></div>
       <span>ON AIR</span>
       <div class="signal-bars ml-2">
@@ -522,36 +537,65 @@
       </div>
     </div>
 
-    <div
-      class="container mx-auto px-4 py-20 md:py-32 relative z-10 flex flex-col items-center justify-center text-center">
-      <span
-        class="inline-block px-4 py-1.5 rounded-full bg-white/20 text-sm font-bold tracking-wider mb-6 border border-white/30 backdrop-blur-sm reveal">BÁO
-        </span>
-      <h1 class="text-4xl md:text-6xl font-black hero-title mb-6 leading-tight drop-shadow-lg glitch"
-        data-text="Giải pháp truyền thông Toàn diện & Hiệu quả">
-        Giải pháp truyền thông <br /><span class="text-yellow-400">Toàn diện & Hiệu quả</span>
-      </h1>
-      <p class="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto mb-10 leading-relaxed font-light reveal"
-        style="transition-delay:0.2s">
-        Khẳng định vị thế thương hiệu với hệ sinh thái truyền thông đa phương tiện của Đài Phát thanh và Truyền hình
-        Thành phố Cần Thơ.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 reveal" style="transition-delay:0.4s">
-        <a href="#services"
-          class="bg-white text-ct-blue px-8 py-4 rounded font-bold text-lg hover:bg-gray-100 transition-all shadow-xl hover:shadow-2xl hover:scale-105 transform">Khám
-          phá Dịch vụ</a>
-        <a href="#contact"
-          class="border-2 border-white text-white px-8 py-4 rounded font-bold text-lg hover:bg-white/10 transition-all broadcast-line">Tải
-          Báo giá 2026</a>
+    <!-- CONTENT LAYER (Layer 2) -->
+    <div class="container mx-auto px-4 relative z-20 h-full flex items-center justify-center text-center">
+      
+      <!-- Slide 1 Content -->
+      <div class="slider-content absolute w-full px-4 active opacity-100 transition-all duration-700 transform translate-y-0">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-white/20 text-sm font-bold tracking-wider mb-6 border border-white/30 backdrop-blur-sm shadow-lg">BÁO & TRUYỀN HÌNH</span>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black hero-title mb-6 leading-tight drop-shadow-2xl glitch" data-text="Giải pháp truyền thông Toàn diện">
+          Giải pháp truyền thông <br /><span class="text-yellow-400">Toàn diện</span>
+        </h1>
+        <p class="text-lg md:text-xl text-blue-50 max-w-2xl mx-auto mb-10 leading-relaxed font-light drop-shadow-md">
+          Khẳng định vị thế thương hiệu với hệ sinh thái truyền thông đa phương tiện của Đài Phát thanh và Truyền hình Thành phố Cần Thơ.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#services" class="bg-white text-ct-blue px-8 py-4 rounded font-bold text-lg hover:bg-gray-100 transition-all shadow-xl hover:shadow-2xl hover:scale-105 transform">Khám phá Dịch vụ</a>
+          <a href="#contact" class="border-2 border-white text-white px-8 py-4 rounded font-bold text-lg hover:bg-white/10 transition-all broadcast-line shadow-lg">Tải Báo giá 2026</a>
+        </div>
+      </div>
+
+      <!-- Slide 2 Content -->
+      <div class="slider-content absolute w-full px-4 opacity-0 transition-all duration-700 transform translate-y-12 pointer-events-none">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-white/20 text-sm font-bold tracking-wider mb-6 border border-white/30 backdrop-blur-sm shadow-lg">PHÁT THANH PHỦ SÓNG</span>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black hero-title mb-6 leading-tight drop-shadow-lg" style="text-shadow: 0 0 20px rgba(255,0,0,0.8);">
+          Lan toả <span class="text-white">Mọi nẻo đường</span>
+        </h1>
+        <p class="text-lg md:text-xl text-red-50 max-w-2xl mx-auto mb-10 leading-relaxed font-light drop-shadow-md">
+          Tiếp cận hàng triệu thính giả Đồng bằng sông Cửu Long với các chương trình phát thanh chất lượng cao và giờ vàng quảng cáo.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#services" class="bg-white text-ct-red px-8 py-4 rounded font-bold text-lg hover:bg-gray-100 transition-all shadow-xl hover:shadow-2xl hover:scale-105 transform">Gói Truyền Thông Audio</a>
+        </div>
+      </div>
+
+      <!-- Slide 3 Content -->
+      <div class="slider-content absolute w-full px-4 opacity-0 transition-all duration-700 transform translate-y-12 pointer-events-none">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-white/20 text-sm font-bold tracking-wider mb-6 border border-white/30 backdrop-blur-sm shadow-lg">DIGITAL & SOCIAL</span>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black hero-title mb-6 leading-tight drop-shadow-2xl glitch" data-text="Tiếp cận Nền tảng số">
+          Tiếp cận <span class="text-[#00ffff]">Nền tảng số</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10 leading-relaxed font-light drop-shadow-md">
+          Xây dựng thương hiệu vững chắc trên báo điện tử và mạng xã hội. Đẩy mạnh tương tác và chuyển đổi số hiệu quả.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#services" class="bg-ct-blue text-white px-8 py-4 rounded font-bold text-lg hover:bg-blue-600 transition-all shadow-xl hover:shadow-2xl hover:scale-105 transform border border-blue-400">Xem Báo giá Digital</a>
+          <a href="#contact" class="bg-gray-800 text-white px-8 py-4 rounded font-bold text-lg hover:bg-gray-700 transition-all shadow-xl hover:shadow-2xl hover:scale-105 transform">Liên hệ Tư vấn</a>
+        </div>
       </div>
     </div>
 
+    <!-- Slider Controls -->
+    <div class="absolute bottom-16 left-0 right-0 z-30 flex justify-center gap-3">
+      <button class="slider-dot w-12 h-1.5 rounded bg-white transition-all cursor-pointer shadow-[0_0_10px_rgba(255,255,255,0.8)]" aria-label="Slide 1" data-index="0"></button>
+      <button class="slider-dot w-6 h-1.5 rounded bg-white/40 hover:bg-white/80 transition-all cursor-pointer" aria-label="Slide 2" data-index="1"></button>
+      <button class="slider-dot w-6 h-1.5 rounded bg-white/40 hover:bg-white/80 transition-all cursor-pointer" aria-label="Slide 3" data-index="2"></button>
+    </div>
+
     <!-- Wave separator -->
-    <div class="w-full relative bottom-0">
+    <div class="absolute bottom-0 w-full z-20">
       <svg class="w-full h-12 md:h-24 fill-gray-50 drop-shadow-sm" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path
-          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,121.22,198.71,108.92Z">
-        </path>
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,121.22,198.71,108.92Z"></path>
       </svg>
     </div>
   </section>
@@ -943,6 +987,75 @@
         }
         animate();
       })();
+
+    // ===== HERO DUAL-LAYER SLIDER LOGIC =====
+    (function () {
+      const bgs = document.querySelectorAll('.slider-bg');
+      const contents = document.querySelectorAll('.slider-content');
+      const dots = document.querySelectorAll('.slider-dot');
+      let currentIndex = 0;
+      let interval;
+
+      function showSlide(index) {
+        bgs.forEach((bg, i) => {
+          if (i === index) {
+            bg.classList.replace('opacity-0', 'opacity-100');
+            bg.classList.add('active');
+          } else {
+            bg.classList.replace('opacity-100', 'opacity-0');
+            bg.classList.remove('active');
+          }
+        });
+
+        contents.forEach((content, i) => {
+          if (i === index) {
+            content.classList.replace('opacity-0', 'opacity-100');
+            content.classList.replace('translate-y-12', 'translate-y-0');
+            content.classList.remove('pointer-events-none');
+            content.classList.add('active');
+          } else {
+            content.classList.replace('opacity-100', 'opacity-0');
+            content.classList.replace('translate-y-0', 'translate-y-12');
+            content.classList.add('pointer-events-none');
+            content.classList.remove('active');
+          }
+        });
+
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.add('w-12', 'bg-white', 'shadow-[0_0_10px_rgba(255,255,255,0.8)]');
+            dot.classList.remove('w-6', 'bg-white/40', 'hover:bg-white/80');
+          } else {
+            dot.classList.remove('w-12', 'bg-white', 'shadow-[0_0_10px_rgba(255,255,255,0.8)]');
+            dot.classList.add('w-6', 'bg-white/40', 'hover:bg-white/80');
+          }
+        });
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % bgs.length;
+        showSlide(currentIndex);
+      }
+
+      function startSlider() {
+        interval = setInterval(nextSlide, 7000); // 7s per slide
+      }
+
+      function stopSlider() {
+        clearInterval(interval);
+      }
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+          stopSlider();
+          currentIndex = parseInt(this.getAttribute('data-index'));
+          showSlide(currentIndex);
+          startSlider();
+        });
+      });
+
+      startSlider();
+    })();
 
     // ===== SCROLL REVEAL OBSERVER =====
     (function () {
